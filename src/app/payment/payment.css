@@ -1,0 +1,83 @@
+.row { display: flex; justify-content: space-between; align-items: flex-start; }
+
+.form-card { padding: 28px; margin-bottom: 28px; }
+.form-title { 
+  font-size: 18px; font-weight: 800; color: #0f172a; 
+  margin-bottom: 22px;
+  display: flex; align-items: center; gap: 10px;
+}
+.form-title::before {
+  content: '';
+  width: 4px; height: 22px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+}
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 24px; }
+.form-actions { display: flex; gap: 12px; margin-top: 8px; }
+
+.calc-bar {
+  display: flex; gap: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  overflow: hidden; margin: 22px 0;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+}
+.calc-item {
+  flex: 1; padding: 16px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  font-size: 11px; color: rgba(255,255,255,0.8); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.calc-item:last-child { border-right: none; }
+.calc-item strong { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.3px; }
+
+.chit-section { margin-bottom: 32px; }
+
+.chit-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 28px; margin-bottom: 14px; flex-wrap: wrap; gap: 14px;
+  background: linear-gradient(135deg, rgba(102,126,234,0.08) 0%, rgba(118,75,162,0.08) 100%);
+  border: 1px solid rgba(102,126,234,0.15);
+}
+.ch-name { 
+  font-size: 18px; font-weight: 800; color: #0f172a;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.ch-meta { font-size: 13px; color: #94a3b8; margin-top: 4px; font-weight: 500; }
+.ch-stats { display: flex; gap: 28px; }
+.ch-stat { display: flex; flex-direction: column; gap: 3px; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.ch-stat strong { font-size: 16px; font-weight: 900; color: #0f172a; }
+.ch-stat strong.green  { background: linear-gradient(135deg, #11998e, #38ef7d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.ch-stat strong.orange { background: linear-gradient(135deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.ch-stat strong.red    { background: linear-gradient(135deg, #ee0979, #ff6a00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.pay-table-card { overflow: hidden; }
+
+.num { color: #94a3b8; font-weight: 800; font-size: 13px; }
+.month-cell { font-weight: 800; color: #0f172a; font-size: 14px; }
+.date-cell { color: #64748b; font-weight: 500; }
+.amt { font-weight: 800; font-size: 15px; }
+.amt.green { background: linear-gradient(135deg, #11998e, #38ef7d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.total-row td { 
+  background: linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.08));
+  font-size: 14px; font-weight: 800;
+}
+.empty { text-align: center; padding: 32px; color: #94a3b8; font-size: 14px; }
+
+@media (max-width: 768px) {
+  .row { flex-direction: column; gap: 14px; }
+  .row .btn { width: 100%; justify-content: center; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-actions { flex-direction: column; }
+  .form-actions .btn { width: 100%; justify-content: center; }
+  .calc-bar { flex-direction: column; border-radius: 16px; }
+  .calc-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding: 14px 18px; }
+  .calc-item:last-child { border-bottom: none; }
+  .chit-header { flex-direction: column; align-items: flex-start; padding: 18px; }
+  .ch-stats { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .pay-table-card { overflow-x: auto; }
+  .table { min-width: 480px; }
+}

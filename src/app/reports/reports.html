@@ -1,0 +1,37 @@
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Reports</div>
+    <div class="page-sub">Visual overview of your chit payments</div>
+  </div>
+
+  <!-- Summary Row -->
+  <div class="summary-row">
+    <div class="card summary-card" *ngFor="let c of chits">
+      <div class="sc-name">{{ c.name }}</div>
+      <div class="sc-progress">
+        <div class="progress"><div class="progress-fill" [style.width.%]="progress(c)"></div></div>
+        <span>{{ progress(c) }}%</span>
+      </div>
+      <div class="sc-amounts">
+        <div><span>Paid</span><strong class="green">₹ {{ totalPaid(c) | number }}</strong></div>
+        <div><span>Remaining</span><strong class="orange">₹ {{ remaining(c) | number }}</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Grid -->
+  <div class="charts-grid">
+    <div class="card chart-card">
+      <div class="chart-title">Paid vs Remaining</div>
+      <div class="chart-wrap"><canvas id="pieChart"></canvas></div>
+    </div>
+    <div class="card chart-card">
+      <div class="chart-title">Chit-wise Breakdown</div>
+      <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+    </div>
+    <div class="card chart-card wide">
+      <div class="chart-title">Monthly Payment Trend</div>
+      <div class="chart-wrap"><canvas id="monthlyChart"></canvas></div>
+    </div>
+  </div>
+</div>

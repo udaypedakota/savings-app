@@ -1,0 +1,77 @@
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">Dashboard</div>
+    <div class="page-sub">Your chit fund overview</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card indigo">
+      <div class="stat-icon">🗂️</div>
+      <div class="stat-body">
+        <div class="stat-value">{{ chits.length }}</div>
+        <div class="stat-label">Total Chits</div>
+      </div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-icon">✅</div>
+      <div class="stat-body">
+        <div class="stat-value">₹ {{ grandPaid | number }}</div>
+        <div class="stat-label">Total Paid</div>
+      </div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-icon">⏳</div>
+      <div class="stat-body">
+        <div class="stat-value">₹ {{ grandRemaining | number }}</div>
+        <div class="stat-label">Remaining</div>
+      </div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-icon">📅</div>
+      <div class="stat-body">
+        <div class="stat-value">₹ {{ monthlyDue | number }}</div>
+        <div class="stat-label">Monthly Due</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Chit Summary</div>
+  <div class="chit-cards">
+    <div class="chit-card card" *ngFor="let c of chits">
+      <div class="chit-top">
+        <div>
+          <div class="chit-name">{{ c.name }}</div>
+          <div class="chit-meta">{{ paidMonths(c) }}/{{ c.duration }} months paid</div>
+        </div>
+        <span class="badge" [class.badge-green]="progress(c) >= 75" [class.badge-blue]="progress(c) >= 40 && progress(c) < 75" [class.badge-orange]="progress(c) < 40">
+          {{ progress(c) }}%
+        </span>
+      </div>
+      <div class="chit-amounts">
+        <div class="amt-item">
+          <span class="amt-label">Total</span>
+          <span class="amt-val">₹ {{ c.totalAmount | number }}</span>
+        </div>
+        <div class="amt-item">
+          <span class="amt-label">Paid</span>
+          <span class="amt-val green">₹ {{ totalPaid(c) | number }}</span>
+        </div>
+        <div class="amt-item">
+          <span class="amt-label">Remaining</span>
+          <span class="amt-val orange">₹ {{ remaining(c) | number }}</span>
+        </div>
+        <div class="amt-item">
+          <span class="amt-label">Monthly</span>
+          <span class="amt-val blue">₹ {{ c.monthlyAmount | number }}</span>
+        </div>
+      </div>
+      <div class="progress">
+        <div class="progress-fill" [style.width.%]="progress(c)"></div>
+      </div>
+      <div class="chit-actions">
+        <a class="btn btn-ghost btn-sm" [routerLink]="['/chits']">View</a>
+        <a class="btn btn-primary btn-sm" [routerLink]="['/payments']">Add Payment</a>
+      </div>
+    </div>
+  </div>
+</div>

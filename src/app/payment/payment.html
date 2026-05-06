@@ -1,0 +1,106 @@
+<div class="page">
+  <div class="page-header row">
+    <div>
+      <div class="page-title">Payments</div>
+      <div class="page-sub">Track monthly chit payments</div>
+    </div>
+    <button class="btn btn-primary" (click)="showForm = !showForm">＋ Add Payment</button>
+  </div>
+
+  <!-- Add Payment Form -->
+  <div class="card form-card" *ngIf="showForm">
+    <div class="form-title">New Payment</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Select Chit</label>
+        <select class="form-control" [(ngModel)]="form.chitId" (ngModelChange)="onChitChange()">
+          <option value="">-- Select Chit --</option>
+          <option *ngFor="let c of chits" [value]="c.id">{{ c.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Month</label>
+        <input class="form-control" [(ngModel)]="form.month" placeholder="e.g. Jun 2025" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Paid Amount (₹)</label>
+        <input class="form-control" type="number" [(ngModel)]="form.paidAmount" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input class="form-control" type="date" [(ngModel)]="form.date" />
+      </div>
+    </div>
+
+    <!-- Auto Calculations -->
+    <div class="calc-bar" *ngIf="selectedChit">
+      <div class="calc-item">
+        <span>Total Paid</span>
+        <strong class="green">₹ {{ totalPaid(selectedChit.id) | number }}</strong>
+      </div>
+      <div class="calc-item">
+        <span>Remaining</span>
+        <strong class="orange">₹ {{ remaining(selectedChit) | number }}</strong>
+      </div>
+      <div class="calc-item">
+        <span>Months Paid</span>
+        <strong>{{ paidMonths(selectedChit.id) }}/{{ selectedChit.duration }}</strong>
+      </div>
+      <div class="calc-item">
+        <span>Pending Months</span>
+        <strong class="red">{{ pendingMonths(selectedChit) }}</strong>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-success" (click)="add()">✅ Save Payment</button>
+      <button class="btn btn-ghost" (click)="showForm = false">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Payment History per Chit -->
+  <div class="chit-section" *ngFor="let c of chits">
+    <div class="chit-header card">
+      <div class="ch-left">
+        <div class="ch-name">{{ c.name }}</div>
+        <div class="ch-meta">{{ paidMonths(c.id) }}/{{ c.duration }} months · ₹{{ c.monthlyAmount | number }}/mo</div>
+      </div>
+      <div class="ch-stats">
+        <div class="ch-stat"><span>Paid</span><strong class="green">₹ {{ totalPaid(c.id) | number }}</strong></div>
+        <div class="ch-stat"><span>Remaining</span><strong class="orange">₹ {{ remaining(c) | number }}</strong></div>
+        <div class="ch-stat"><span>Pending</span><strong class="red">{{ pendingMonths(c) }} mo</strong></div>
+      </div>
+    </div>
+
+    <div class="card pay-table-card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Month</th>
+            <th>Amount Paid</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of paymentsFor(c.id); let i = index">
+            <td class="num">{{ i + 1 }}</td>
+            <td class="month-cell">{{ p.month }}</td>
+            <td class="amt green">₹ {{ p.paidAmount | number }}</td>
+            <td class="date-cell">{{ p.date | date:'dd MMM yyyy' }}</td>
+            <td><button class="btn btn-danger btn-sm" (click)="deletePayment(p.id)">🗑️</button></td>
+          </tr>
+          <tr *ngIf="!paymentsFor(c.id).length">
+            <td colspan="5" class="empty">No payments yet for {{ c.name }}</td>
+          </tr>
+          <tr class="total-row" *ngIf="paymentsFor(c.id).length">
+            <td colspan="2"><strong>Total Paid</strong></td>
+            <td class="amt green"><strong>₹ {{ totalPaid(c.id) | number }}</strong></td>
+            <td colspan="2"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="page">
+  <div class="page-header row">
+    <div>
+      <div class="page-title">Chit List</div>
+      <div class="page-sub">Manage all your chit funds</div>
+    </div>
+    <a class="btn btn-primary" routerLink="/chits/add">＋ Add Chit</a>
+  </div>
+
+  <!-- Desktop Table -->
+  <div class="card table-card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Total</th>
+          <th>Monthly</th>
+          <th>Duration</th>
+          <th>Paid</th>
+          <th>Remaining</th>
+          <th>Progress</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of chits; let i = index">
+          <td class="num">{{ i + 1 }}</td>
+          <td><span class="chit-name">{{ c.name }}</span><br><span class="chit-start">From {{ c.startDate | date:'MMM yyyy' }}</span></td>
+          <td class="amt">₹ {{ c.totalAmount | number }}</td>
+          <td class="amt blue">₹ {{ c.monthlyAmount | number }}</td>
+          <td class="center">{{ paidMonths(c) }}/{{ c.duration }} mo</td>
+          <td class="amt green">₹ {{ totalPaid(c) | number }}</td>
+          <td class="amt orange">₹ {{ remaining(c) | number }}</td>
+          <td class="prog-cell">
+            <div class="progress"><div class="progress-fill" [style.width.%]="progress(c)"></div></div>
+            <span class="prog-pct">{{ progress(c) }}%</span>
+          </td>
+          <td class="actions">
+            <a class="btn btn-ghost btn-sm" [routerLink]="['/chits/edit', c.id]">✏️ Edit</a>
+            <button class="btn btn-danger btn-sm" (click)="delete(c.id)">🗑️ Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf="!chits.length">
+          <td colspan="9" class="empty">No chits yet. <a routerLink="/chits/add">Add one →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile Cards -->
+  <div class="mobile-cards">
+    <div class="card mobile-card" *ngFor="let c of chits; let i = index">
+      <div class="mc-header">
+        <div>
+          <div class="chit-name">{{ c.name }}</div>
+          <div class="chit-start">From {{ c.startDate | date:'MMM yyyy' }} · {{ paidMonths(c) }}/{{ c.duration }} months</div>
+        </div>
+        <span class="badge badge-purple">{{ progress(c) }}%</span>
+      </div>
+      <div class="mc-amounts">
+        <div class="mc-amt"><span>Total</span><strong>₹ {{ c.totalAmount | number }}</strong></div>
+        <div class="mc-amt"><span>Monthly</span><strong class="blue">₹ {{ c.monthlyAmount | number }}</strong></div>
+        <div class="mc-amt"><span>Paid</span><strong class="green">₹ {{ totalPaid(c) | number }}</strong></div>
+        <div class="mc-amt"><span>Remaining</span><strong class="orange">₹ {{ remaining(c) | number }}</strong></div>
+      </div>
+      <div class="progress" style="margin: 10px 0;"><div class="progress-fill" [style.width.%]="progress(c)"></div></div>
+      <div class="mc-actions">
+        <a class="btn btn-ghost btn-sm" [routerLink]="['/chits/edit', c.id]">✏️ Edit</a>
+        <button class="btn btn-danger btn-sm" (click)="delete(c.id)">🗑️ Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

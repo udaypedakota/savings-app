@@ -1,0 +1,54 @@
+.summary-row { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+  gap: 18px; 
+  margin-bottom: 32px; 
+}
+
+.summary-card { padding: 24px; }
+.sc-name { 
+  font-size: 17px; font-weight: 800; color: #0f172a; 
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.sc-progress { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.sc-progress .progress { flex: 1; }
+.sc-progress span { 
+  font-size: 14px; font-weight: 900; 
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  white-space: nowrap; min-width: 36px;
+}
+.sc-amounts { display: flex; justify-content: space-between; font-size: 12px; color: #64748b; font-weight: 600; }
+.sc-amounts div { display: flex; flex-direction: column; gap: 4px; }
+.sc-amounts strong { font-size: 15px; font-weight: 900; }
+.sc-amounts strong.green  { background: linear-gradient(135deg, #11998e, #38ef7d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.sc-amounts strong.orange { background: linear-gradient(135deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.charts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.chart-card { padding: 28px; }
+.chart-card.wide { grid-column: 1 / -1; }
+.chart-title { 
+  font-size: 16px; font-weight: 800; color: #0f172a; 
+  margin-bottom: 22px;
+  display: flex; align-items: center; gap: 10px;
+}
+.chart-title::before {
+  content: '';
+  width: 4px; height: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+}
+.chart-wrap { position: relative; height: 300px; }
+.chart-wrap canvas { max-height: 300px; }
+
+@media (max-width: 768px) { 
+  .summary-row { grid-template-columns: 1fr; gap: 14px; }
+  .summary-card { padding: 20px; }
+  .charts-grid { grid-template-columns: 1fr; gap: 16px; } 
+  .chart-card.wide { grid-column: auto; }
+  .chart-card { padding: 20px; }
+  .chart-wrap { height: 240px; }
+  .chart-wrap canvas { max-height: 240px; }
+}
