@@ -130,23 +130,27 @@
 
 @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 768px)  {
-  .page { padding: 20px 14px; }
-  .page-title { font-size: 22px; }
-  .stats-grid { grid-template-columns: 1fr; gap: 14px; }
-  .stat-card { padding: 20px 18px; flex-direction: row; }
-  .stat-icon { width: 52px; height: 52px; font-size: 26px; }
-  .stat-value { font-size: 20px; }
-  .stat-label { font-size: 12px; }
-  .section-title { font-size: 17px; margin-bottom: 16px; }
-  .chit-cards { grid-template-columns: 1fr; gap: 16px; }
-  .chit-card { padding: 20px; }
-  .chit-name { font-size: 17px; }
-  .chit-amounts { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 14px; }
-  .chit-actions { flex-direction: column; }
-  .chit-actions .btn { width: 100%; justify-content: center; }
-  .money-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .money-card { padding: 16px; }
-  .money-value { font-size: 16px; }
+  .page { padding: 16px 12px; }
+  .page-title { font-size: 20px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+  .stat-card { padding: 14px 12px; gap: 10px; border-radius: 16px; }
+  .stat-icon { width: 40px; height: 40px; font-size: 20px; border-radius: 12px; }
+  .stat-value { font-size: 15px; }
+  .stat-label { font-size: 10px; }
+  .section-title { font-size: 15px; margin-bottom: 12px; margin-top: 20px; }
+  .chit-cards { grid-template-columns: 1fr; gap: 12px; }
+  .chit-card { padding: 16px; }
+  .chit-name { font-size: 15px; }
+  .chit-amounts { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 12px; }
+  .amt-val { font-size: 12px; }
+  .chit-actions { flex-direction: row; }
+  .chit-actions .btn { flex: 1; justify-content: center; }
+  .money-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+  .money-card { padding: 12px 10px; gap: 10px; border-radius: 14px; }
+  .money-icon { width: 36px; height: 36px; font-size: 18px; border-radius: 10px; }
+  .money-value { font-size: 13px; }
+  .money-label { font-size: 10px; }
+  .money-label-top { font-size: 9px; }
 }
 
 .money-grid {
