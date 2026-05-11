@@ -36,27 +36,29 @@
     <router-outlet />
   </main>
 
+  <!-- More Menu Drawer -->
+  <div class="more-drawer" [class.open]="moreOpen">
+    <a routerLink="/lending" routerLinkActive="active" (click)="moreOpen=false"><span>🤝</span> Lending</a>
+    <a routerLink="/credit-cards" routerLinkActive="active" (click)="moreOpen=false"><span>💳</span> Credit Cards</a>
+    <a routerLink="/reports" routerLinkActive="active" (click)="moreOpen=false"><span>◎</span> Reports</a>
+  </div>
+  <div class="more-overlay" *ngIf="moreOpen" (click)="moreOpen=false"></div>
+
   <nav class="bottom-nav">
     <a routerLink="/dashboard" routerLinkActive="active">
       <span>⊞</span><label>Home</label>
     </a>
     <a routerLink="/chits" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <span>☰</span><label>Chits</label>
-      </a>
-    <a routerLink="/chits/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <span>＋</span><label>Add</label>
-      </a>
+      <span>☰</span><label>Chits</label>
+    </a>
+    <a routerLink="/chits/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="fab">
+      <span>＋</span>
+    </a>
     <a routerLink="/payments" routerLinkActive="active">
       <span>₹</span><label>Pay</label>
     </a>
-    <a routerLink="/lending" routerLinkActive="active">
-      <span>🤝</span><label>Lend</label>
-    </a>
-    <a routerLink="/credit-cards" routerLinkActive="active">
-      <span>💳</span><label>Cards</label>
-    </a>
-    <a routerLink="/reports" routerLinkActive="active">
-      <span>◎</span><label>Reports</label>
+    <a (click)="moreOpen=!moreOpen" [class.active]="moreOpen">
+      <span>⋯</span><label>More</label>
     </a>
   </nav>
 </div>
