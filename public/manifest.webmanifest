@@ -1,6 +1,6 @@
 {
-  "name": "chitti-tracker",
-  "short_name": "chitti-tracker",
+  "name": "MoneyMate",
+  "short_name": "MoneyMate",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
