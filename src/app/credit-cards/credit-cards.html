@@ -61,9 +61,9 @@
   <div class="card-section">
     <div class="card-header-bar axis-bar">
       <span>💳 Axis Card</span>
-      <span>Total: ₹ {{ totalFor('Axis') | number }} &nbsp;|&nbsp; Outstanding: ₹ {{ outstanding('Axis') | number }}</span>
+      <span>Outstanding: ₹ {{ outstanding('Axis') | number }}</span>
     </div>
-    <div class="card table-card">
+    <div class="card table-card desktop-only">
       <table class="table">
         <thead><tr><th>Description</th><th>Amount</th><th>Date</th><th>Status</th><th></th></tr></thead>
         <tbody>
@@ -73,7 +73,7 @@
             <td>{{ x.date | date:'dd MMM yyyy' }}</td>
             <td><span class="badge" [class.badge-green]="x.paid" [class.badge-red]="!x.paid">{{ x.paid ? 'Paid' : 'Pending' }}</span></td>
             <td class="actions">
-              <button class="btn btn-success btn-sm" (click)="togglePaid(x)" [title]="x.paid ? 'Mark Unpaid' : 'Mark Paid'">{{ x.paid ? '↩️' : '✅' }}</button>
+              <button class="btn btn-success btn-sm" (click)="togglePaid(x)">{{ x.paid ? '↩️' : '✅' }}</button>
               <button class="btn btn-danger btn-sm" (click)="delete(x.id)">🗑️</button>
             </td>
           </tr>
@@ -81,15 +81,29 @@
         </tbody>
       </table>
     </div>
+    <div class="mobile-list mobile-only">
+      <div class="spend-card card" *ngFor="let x of spendsFor('Axis')" [class.paid-card]="x.paid">
+        <div class="sc-top">
+          <span class="sc-desc">{{ x.description }}</span>
+          <span class="amt" [class.red]="!x.paid" [class.muted]="x.paid">₹ {{ x.amount | number }}</span>
+        </div>
+        <div class="sc-meta">{{ x.date | date:'dd MMM yyyy' }} · <span class="badge" [class.badge-green]="x.paid" [class.badge-red]="!x.paid">{{ x.paid ? 'Paid' : 'Pending' }}</span></div>
+        <div class="sc-actions">
+          <button class="btn btn-success btn-sm" (click)="togglePaid(x)">{{ x.paid ? '↩️ Unpaid' : '✅ Mark Paid' }}</button>
+          <button class="btn btn-danger btn-sm" (click)="delete(x.id)">🗑️</button>
+        </div>
+      </div>
+      <div class="empty-msg" *ngIf="!spendsFor('Axis').length">No spends yet</div>
+    </div>
   </div>
 
   <!-- Canara Card -->
   <div class="card-section">
     <div class="card-header-bar canara-bar">
       <span>💳 Canara Card</span>
-      <span>Total: ₹ {{ totalFor('Canara') | number }} &nbsp;|&nbsp; Outstanding: ₹ {{ outstanding('Canara') | number }}</span>
+      <span>Outstanding: ₹ {{ outstanding('Canara') | number }}</span>
     </div>
-    <div class="card table-card">
+    <div class="card table-card desktop-only">
       <table class="table">
         <thead><tr><th>Description</th><th>Amount</th><th>Date</th><th>Status</th><th></th></tr></thead>
         <tbody>
@@ -99,13 +113,27 @@
             <td>{{ x.date | date:'dd MMM yyyy' }}</td>
             <td><span class="badge" [class.badge-green]="x.paid" [class.badge-red]="!x.paid">{{ x.paid ? 'Paid' : 'Pending' }}</span></td>
             <td class="actions">
-              <button class="btn btn-success btn-sm" (click)="togglePaid(x)" [title]="x.paid ? 'Mark Unpaid' : 'Mark Paid'">{{ x.paid ? '↩️' : '✅' }}</button>
+              <button class="btn btn-success btn-sm" (click)="togglePaid(x)">{{ x.paid ? '↩️' : '✅' }}</button>
               <button class="btn btn-danger btn-sm" (click)="delete(x.id)">🗑️</button>
             </td>
           </tr>
           <tr *ngIf="!spendsFor('Canara').length"><td colspan="5" class="empty">No spends yet</td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="mobile-list mobile-only">
+      <div class="spend-card card" *ngFor="let x of spendsFor('Canara')" [class.paid-card]="x.paid">
+        <div class="sc-top">
+          <span class="sc-desc">{{ x.description }}</span>
+          <span class="amt" [class.red]="!x.paid" [class.muted]="x.paid">₹ {{ x.amount | number }}</span>
+        </div>
+        <div class="sc-meta">{{ x.date | date:'dd MMM yyyy' }} · <span class="badge" [class.badge-green]="x.paid" [class.badge-red]="!x.paid">{{ x.paid ? 'Paid' : 'Pending' }}</span></div>
+        <div class="sc-actions">
+          <button class="btn btn-success btn-sm" (click)="togglePaid(x)">{{ x.paid ? '↩️ Unpaid' : '✅ Mark Paid' }}</button>
+          <button class="btn btn-danger btn-sm" (click)="delete(x.id)">🗑️</button>
+        </div>
+      </div>
+      <div class="empty-msg" *ngIf="!spendsFor('Canara').length">No spends yet</div>
     </div>
   </div>
 </div>

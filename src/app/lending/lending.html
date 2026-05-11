@@ -61,7 +61,7 @@
 
   <!-- I Gave -->
   <div class="section-title">💰 I Gave (They Owe Me)</div>
-  <div class="card table-card">
+  <div class="card table-card desktop-only">
     <table class="table">
       <thead><tr><th>Person</th><th>Amount</th><th>Date</th><th>Note</th><th></th></tr></thead>
       <tbody>
@@ -79,10 +79,24 @@
       </tbody>
     </table>
   </div>
+  <div class="mobile-list mobile-only">
+    <div class="lend-card card" *ngFor="let x of gave">
+      <div class="lc-top">
+        <span class="lc-person">{{ x.person }}</span>
+        <span class="amt green">₹ {{ x.amount | number }}</span>
+      </div>
+      <div class="lc-meta">{{ x.date | date:'dd MMM yyyy' }} <span *ngIf="x.note"> · {{ x.note }}</span></div>
+      <div class="lc-actions">
+        <button class="btn btn-success btn-sm" (click)="toggleSettle(x)">✅ Settle</button>
+        <button class="btn btn-danger btn-sm" (click)="delete(x.id)">🗑️</button>
+      </div>
+    </div>
+    <div class="empty-msg" *ngIf="!gave.length">No pending entries</div>
+  </div>
 
   <!-- I Took -->
   <div class="section-title">🔴 I Took (I Owe Them)</div>
-  <div class="card table-card">
+  <div class="card table-card desktop-only">
     <table class="table">
       <thead><tr><th>Person</th><th>Amount</th><th>Date</th><th>Note</th><th></th></tr></thead>
       <tbody>
@@ -100,10 +114,24 @@
       </tbody>
     </table>
   </div>
+  <div class="mobile-list mobile-only">
+    <div class="lend-card card" *ngFor="let x of took">
+      <div class="lc-top">
+        <span class="lc-person">{{ x.person }}</span>
+        <span class="amt red">₹ {{ x.amount | number }}</span>
+      </div>
+      <div class="lc-meta">{{ x.date | date:'dd MMM yyyy' }} <span *ngIf="x.note"> · {{ x.note }}</span></div>
+      <div class="lc-actions">
+        <button class="btn btn-success btn-sm" (click)="toggleSettle(x)">✅ Settle</button>
+        <button class="btn btn-danger btn-sm" (click)="delete(x.id)">🗑️</button>
+      </div>
+    </div>
+    <div class="empty-msg" *ngIf="!took.length">No pending entries</div>
+  </div>
 
   <!-- Settled -->
   <div class="section-title">✅ Settled</div>
-  <div class="card table-card">
+  <div class="card table-card desktop-only">
     <table class="table">
       <thead><tr><th>Person</th><th>Type</th><th>Amount</th><th>Date</th><th>Note</th><th></th></tr></thead>
       <tbody>
@@ -118,5 +146,18 @@
         <tr *ngIf="!settled.length"><td colspan="6" class="empty">No settled entries</td></tr>
       </tbody>
     </table>
+  </div>
+  <div class="mobile-list mobile-only">
+    <div class="lend-card card settled-card" *ngFor="let x of settled">
+      <div class="lc-top">
+        <span class="lc-person">{{ x.person }}</span>
+        <span class="badge" [class.badge-green]="x.type==='gave'" [class.badge-red]="x.type==='took'">{{ x.type === 'gave' ? 'Gave' : 'Took' }}</span>
+      </div>
+      <div class="lc-meta">₹ {{ x.amount | number }} · {{ x.date | date:'dd MMM yyyy' }}</div>
+      <div class="lc-actions">
+        <button class="btn btn-danger btn-sm" (click)="delete(x.id)">🗑️ Delete</button>
+      </div>
+    </div>
+    <div class="empty-msg" *ngIf="!settled.length">No settled entries</div>
   </div>
 </div>

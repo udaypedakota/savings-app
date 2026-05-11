@@ -20,13 +20,25 @@
 .paid-row td { opacity: 0.55; }
 .badge-red { background: #fee2e2; color: #f43f5e; }
 
+.desktop-only { display: block; }
+.mobile-only  { display: none; }
+.mobile-list  { display: flex; flex-direction: column; gap: 10px; }
+.spend-card   { padding: 14px 16px; border-radius: 14px; }
+.sc-top  { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.sc-desc { font-weight: 800; font-size: 14px; color: #0f172a; }
+.sc-meta { font-size: 12px; color: #94a3b8; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.sc-actions { display: flex; gap: 8px; }
+.sc-actions .btn { flex: 1; justify-content: center; }
+.paid-card { opacity: 0.6; }
+.empty-msg { text-align: center; padding: 20px; color: #94a3b8; font-size: 13px; }
+
 @media (max-width: 768px) {
-  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
-  .stat-card { padding: 14px 12px; gap: 10px; border-radius: 16px; }
-  .stat-icon { width: 40px; height: 40px; font-size: 20px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+  .stat-card { padding: 12px 10px; gap: 8px; border-radius: 14px; flex-direction: column; align-items: flex-start; }
+  .stat-icon { width: 36px; height: 36px; font-size: 18px; }
   .stat-value { font-size: 15px; }
   .stat-label { font-size: 10px; }
-  .card-header-bar { font-size: 12px; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 14px; }
-  .table-card { overflow-x: auto; }
-  .table { min-width: 480px; }
+  .card-header-bar { font-size: 12px; padding: 10px 14px; }
+  .desktop-only { display: none; }
+  .mobile-only  { display: flex; }
 }
