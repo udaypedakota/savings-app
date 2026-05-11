@@ -23,6 +23,12 @@
       <a routerLink="/reports" routerLinkActive="active">
         <span class="nav-icon">◎</span> Reports
       </a>
+      <a routerLink="/lending" routerLinkActive="active">
+        <span class="nav-icon">🤝</span> Lending
+      </a>
+      <a routerLink="/credit-cards" routerLinkActive="active">
+        <span class="nav-icon">💳</span> Credit Cards
+      </a>
     </nav>
   </aside>
 
@@ -35,13 +41,19 @@
       <span>⊞</span><label>Home</label>
     </a>
     <a routerLink="/chits" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <span>☰</span><label>Chits</label>
-    </a>
-    <a routerLink="/chits/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="fab">
-      <span>＋</span>
-    </a>
+        <span>☰</span><label>Chits</label>
+      </a>
+    <a routerLink="/chits/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <span>＋</span><label>Add</label>
+      </a>
     <a routerLink="/payments" routerLinkActive="active">
       <span>₹</span><label>Pay</label>
+    </a>
+    <a routerLink="/lending" routerLinkActive="active">
+      <span>🤝</span><label>Lend</label>
+    </a>
+    <a routerLink="/credit-cards" routerLinkActive="active">
+      <span>💳</span><label>Cards</label>
     </a>
     <a routerLink="/reports" routerLinkActive="active">
       <span>◎</span><label>Reports</label>

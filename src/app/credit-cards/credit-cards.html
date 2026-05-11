@@ -1,0 +1,111 @@
+<div class="page">
+  <div class="page-header row">
+    <div>
+      <div class="page-title">Credit Cards</div>
+      <div class="page-sub">Track Axis & Canara card spends</div>
+    </div>
+    <button class="btn btn-primary" (click)="showForm = !showForm">＋ Add Spend</button>
+  </div>
+
+  <!-- Summary -->
+  <div class="stats-grid">
+    <div class="stat-card axis">
+      <div class="stat-icon">💳</div>
+      <div class="stat-body">
+        <div class="stat-label-top">Axis Card</div>
+        <div class="stat-value">₹ {{ outstanding('Axis') | number }}</div>
+        <div class="stat-label">Outstanding</div>
+      </div>
+    </div>
+    <div class="stat-card canara">
+      <div class="stat-icon">💳</div>
+      <div class="stat-body">
+        <div class="stat-label-top">Canara Card</div>
+        <div class="stat-value">₹ {{ outstanding('Canara') | number }}</div>
+        <div class="stat-label">Outstanding</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="card form-card" *ngIf="showForm">
+    <div class="form-title">New Spend</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Card</label>
+        <select class="form-control" [(ngModel)]="form.card">
+          <option value="Axis">Axis Card</option>
+          <option value="Canara">Canara Card</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Amount (₹)</label>
+        <input class="form-control" type="number" [(ngModel)]="form.amount" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input class="form-control" type="date" [(ngModel)]="form.date" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <input class="form-control" [(ngModel)]="form.description" placeholder="e.g. Groceries" />
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-success" (click)="add()">✅ Save</button>
+      <button class="btn btn-ghost" (click)="showForm = false">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Axis Card -->
+  <div class="card-section">
+    <div class="card-header-bar axis-bar">
+      <span>💳 Axis Card</span>
+      <span>Total: ₹ {{ totalFor('Axis') | number }} &nbsp;|&nbsp; Outstanding: ₹ {{ outstanding('Axis') | number }}</span>
+    </div>
+    <div class="card table-card">
+      <table class="table">
+        <thead><tr><th>Description</th><th>Amount</th><th>Date</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          <tr *ngFor="let x of spendsFor('Axis')" [class.paid-row]="x.paid">
+            <td class="desc">{{ x.description }}</td>
+            <td class="amt" [class.red]="!x.paid" [class.muted]="x.paid">₹ {{ x.amount | number }}</td>
+            <td>{{ x.date | date:'dd MMM yyyy' }}</td>
+            <td><span class="badge" [class.badge-green]="x.paid" [class.badge-red]="!x.paid">{{ x.paid ? 'Paid' : 'Pending' }}</span></td>
+            <td class="actions">
+              <button class="btn btn-success btn-sm" (click)="togglePaid(x)" [title]="x.paid ? 'Mark Unpaid' : 'Mark Paid'">{{ x.paid ? '↩️' : '✅' }}</button>
+              <button class="btn btn-danger btn-sm" (click)="delete(x.id)">🗑️</button>
+            </td>
+          </tr>
+          <tr *ngIf="!spendsFor('Axis').length"><td colspan="5" class="empty">No spends yet</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Canara Card -->
+  <div class="card-section">
+    <div class="card-header-bar canara-bar">
+      <span>💳 Canara Card</span>
+      <span>Total: ₹ {{ totalFor('Canara') | number }} &nbsp;|&nbsp; Outstanding: ₹ {{ outstanding('Canara') | number }}</span>
+    </div>
+    <div class="card table-card">
+      <table class="table">
+        <thead><tr><th>Description</th><th>Amount</th><th>Date</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          <tr *ngFor="let x of spendsFor('Canara')" [class.paid-row]="x.paid">
+            <td class="desc">{{ x.description }}</td>
+            <td class="amt" [class.red]="!x.paid" [class.muted]="x.paid">₹ {{ x.amount | number }}</td>
+            <td>{{ x.date | date:'dd MMM yyyy' }}</td>
+            <td><span class="badge" [class.badge-green]="x.paid" [class.badge-red]="!x.paid">{{ x.paid ? 'Paid' : 'Pending' }}</span></td>
+            <td class="actions">
+              <button class="btn btn-success btn-sm" (click)="togglePaid(x)" [title]="x.paid ? 'Mark Unpaid' : 'Mark Paid'">{{ x.paid ? '↩️' : '✅' }}</button>
+              <button class="btn btn-danger btn-sm" (click)="delete(x.id)">🗑️</button>
+            </td>
+          </tr>
+          <tr *ngIf="!spendsFor('Canara').length"><td colspan="5" class="empty">No spends yet</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

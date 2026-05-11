@@ -74,4 +74,39 @@
       </div>
     </div>
   </div>
+
+  <!-- Money Summary -->
+  <div class="section-title">Money Tracker</div>
+  <div class="money-grid">
+    <a class="money-card green" routerLink="/lending">
+      <div class="money-icon">🤝</div>
+      <div>
+        <div class="money-value">₹ {{ othersOweMe | number }}</div>
+        <div class="money-label">Others Owe You</div>
+      </div>
+    </a>
+    <a class="money-card red" routerLink="/lending">
+      <div class="money-icon">💸</div>
+      <div>
+        <div class="money-value">₹ {{ iOweOthers | number }}</div>
+        <div class="money-label">You Owe Others</div>
+      </div>
+    </a>
+    <a class="money-card axis" routerLink="/credit-cards">
+      <div class="money-icon">💳</div>
+      <div>
+        <div class="money-label-top">Axis Card</div>
+        <div class="money-value">₹ {{ axisOutstanding | number }}</div>
+        <div class="money-label">Outstanding</div>
+      </div>
+    </a>
+    <a class="money-card canara" routerLink="/credit-cards">
+      <div class="money-icon">💳</div>
+      <div>
+        <div class="money-label-top">Canara Card</div>
+        <div class="money-value">₹ {{ canaraOutstanding | number }}</div>
+        <div class="money-label">Outstanding</div>
+      </div>
+    </a>
+  </div>
 </div>

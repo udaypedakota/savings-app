@@ -24,4 +24,9 @@ export class Dashboard implements OnInit {
   get grandPaid()      { return this.chits.reduce((s, c) => s + this.totalPaid(c), 0); }
   get grandRemaining() { return this.chits.reduce((s, c) => s + this.remaining(c), 0); }
   get monthlyDue()     { return this.chits.reduce((s, c) => s + c.monthlyAmount, 0); }
+
+  get othersOweMe()  { return this.data.getLendings().filter(x => x.type === 'gave' && !x.settled).reduce((s, x) => s + x.amount, 0); }
+  get iOweOthers()   { return this.data.getLendings().filter(x => x.type === 'took' && !x.settled).reduce((s, x) => s + x.amount, 0); }
+  get axisOutstanding()   { return this.data.cardOutstanding('Axis'); }
+  get canaraOutstanding() { return this.data.cardOutstanding('Canara'); }
 }

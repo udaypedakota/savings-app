@@ -4,6 +4,8 @@ import { ChitList } from './chit-list/chit-list';
 import { AddChit } from './add-chit/add-chit';
 import { Payment } from './payment/payment';
 import { Reports } from './reports/reports';
+import { Lending } from './lending/lending';
+import { CreditCards } from './credit-cards/credit-cards';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -13,4 +15,6 @@ export const routes: Routes = [
   { path: 'chits/edit/:id', component: AddChit },
   { path: 'payments', component: Payment },
   { path: 'reports', component: Reports },
+  { path: 'lending', component: Lending },
+  { path: 'credit-cards', component: CreditCards },
 ];

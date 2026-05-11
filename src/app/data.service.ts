@@ -1,5 +1,24 @@
 import { Injectable } from '@angular/core';
 
+export interface Lending {
+  id: string;
+  person: string;
+  amount: number;
+  type: 'gave' | 'took';
+  date: string;
+  note: string;
+  settled: boolean;
+}
+
+export interface CardSpend {
+  id: string;
+  card: 'Axis' | 'Canara';
+  amount: number;
+  date: string;
+  description: string;
+  paid: boolean;
+}
+
 export interface Chit {
   id: string;
   name: string;
@@ -126,5 +145,38 @@ export class DataService {
 
   remaining(chit: Chit): number {
     return chit.totalAmount - this.totalPaid(chit.id);
+  }
+
+  // Lending
+  private LEND_KEY = 'lendings';
+  getLendings(): Lending[] {
+    const s = localStorage.getItem(this.LEND_KEY);
+    return s ? JSON.parse(s) : [];
+  }
+  saveLendings(l: Lending[]) { localStorage.setItem(this.LEND_KEY, JSON.stringify(l)); }
+  addLending(l: Omit<Lending, 'id'>): Lending {
+    const all = this.getLendings();
+    const item = { ...l, id: Date.now().toString() };
+    all.push(item); this.saveLendings(all); return item;
+  }
+  updateLending(l: Lending) { this.saveLendings(this.getLendings().map(x => x.id === l.id ? l : x)); }
+  deleteLending(id: string) { this.saveLendings(this.getLendings().filter(x => x.id !== id)); }
+
+  // Credit Cards
+  private CARD_KEY = 'cardspends';
+  getCardSpends(): CardSpend[] {
+    const s = localStorage.getItem(this.CARD_KEY);
+    return s ? JSON.parse(s) : [];
+  }
+  saveCardSpends(c: CardSpend[]) { localStorage.setItem(this.CARD_KEY, JSON.stringify(c)); }
+  addCardSpend(c: Omit<CardSpend, 'id'>): CardSpend {
+    const all = this.getCardSpends();
+    const item = { ...c, id: Date.now().toString() };
+    all.push(item); this.saveCardSpends(all); return item;
+  }
+  updateCardSpend(c: CardSpend) { this.saveCardSpends(this.getCardSpends().map(x => x.id === c.id ? c : x)); }
+  deleteCardSpend(id: string) { this.saveCardSpends(this.getCardSpends().filter(x => x.id !== id)); }
+  cardOutstanding(card: 'Axis' | 'Canara') {
+    return this.getCardSpends().filter(x => x.card === card && !x.paid).reduce((s, x) => s + x.amount, 0);
   }
 }
